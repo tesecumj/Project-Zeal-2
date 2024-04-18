@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1>Inventory Form</h1>
+  <form id="inventoryForm">
+    <label for="partName">Part Name/Description:</label>
+    <input type="text" id="partName" name="partName" required><br>
+
+    <label for="category">Category:</label>
+    <input type="text" id="category" name="category" required><br>
+
+    <label for="condition">Condition/Working Status:</label>
+    <input type="text" id="condition" name="condition" required><br>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" required><br>
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required><br>
+
+    <label for="dateAcquired">Date Acquired:</label>
+    <input type="date" id="dateAcquired" name="dateAcquired" required><br>
+
+    <label for="supplier">Supplier/Manufacturer:</label>
+    <input type="text" id="supplier" name="supplier" required><br>
+
+    <label for="serialNumber">Serial Number/ID:</label>
+    <input type="text" id="serialNumber" name="serialNumber" required><br>
+
+    <label for="price">Price/Cost:</label>
+    <input type="number" id="price" name="price" step="0.01" required><br>
+
+    <label for="notes">Notes/Comments:</label>
+    <textarea id="notes" name="notes"></textarea><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Test Button -->
+  <button id="testButton">Test Google Sheets API</button>
+
+  <!-- Output Area -->
+  <div id="output"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
