@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Management</title>
+  <title>Inventory Form</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-  <h1>Inventory Management</h1>
+  <h1>Inventory Form</h1>
   <form id="inventoryForm">
     <label for="partName">Part Name:</label>
-    <input type="text" id="partName" name="partName" required><br><br>
+    <input type="text" id="partName" name="partName">
+
     <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" name="quantity" required><br><br>
+    <input type="number" id="quantity" name="quantity">
+
     <button type="submit">Submit</button>
   </form>
   <div id="output"></div>
 
-  <!-- Include Google Sheets API library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gapi.client.sheets/4.0.0/sheets.min.js"></script>
-  <!-- Include your JavaScript file -->
-  <script src="script.js"></script>
+  <!-- JavaScript code here -->
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
