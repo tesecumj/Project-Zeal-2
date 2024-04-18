@@ -1,16 +1,21 @@
 // Initialize Google Sheets API client
-const doc = new GoogleSpreadsheet('1dF7eoub9ZFy43JFeMlV8j2lAvaw-VdI5sUUmbNOL880'); // Google Sheet ID
-const apiKey = 'AIzaSyC050Oxqz9yPTaN03DJsZCx5risTvXtzAY'; // Replace 'YOUR_API_KEY' with your actual API key
+gapi.load('client', initClient);
+
+async function initClient() {
+  try {
+    await gapi.client.init({
+      apiKey: 'AIzaSyC050Oxqz9yPTaN03DJsZCx5risTvXtzAY', // Your API key
+      discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+    });
+    console.log('Google Sheets API client initialized successfully.');
+    accessSpreadsheet(); // Call your function to access the spreadsheet here
+  } catch (error) {
+    console.error('Error initializing Google Sheets API client:', error);
+  }
+}
 
 async function accessSpreadsheet() {
   try {
-    // Load Google Sheets API client library with API key
-    await doc.useApiKey(apiKey);
-
-    await doc.loadInfo(); // loads document properties and worksheets
-
-    const sheet = doc.sheetsByIndex[0]; // assuming the first sheet is where you want to write data
-
     const form = document.getElementById('inventoryForm');
     const outputDiv = document.getElementById('output');
 
@@ -27,9 +32,16 @@ async function accessSpreadsheet() {
         const time = new Date().toLocaleTimeString();
         const dateTime = `${date} ${time}`;
 
-        await sheet.addRow({
-          ...entries,
-          'DateTime': dateTime,
+        // Call the Google Sheets API to append data
+        const response = await gapi.client.sheets.spreadsheets.values.append({
+          spreadsheetId: '1dF7eoub9ZFy43JFeMlV8j2lAvaw-VdI5sUUmbNOL880', // Your Google Sheet ID
+          range: 'Sheet1', // Change to your sheet name and range
+          valueInputOption: 'USER_ENTERED',
+          resource: {
+            values: [
+              [entries.partName, entries.quantity, dateTime],
+            ],
+          },
         });
 
         console.log('Inventory entry added successfully.');
@@ -54,17 +66,3 @@ async function accessSpreadsheet() {
     console.error('Error accessing Google Sheets:', error);
   }
 }
-
-async function testAPIConnection() {
-  try {
-    // Load Google Sheets API client library with API key
-    await doc.useApiKey(apiKey);
-
-    console.log('Google Sheets API connected successfully.');
-  } catch (error) {
-    console.error('Error connecting to Google Sheets API:', error);
-  }
-}
-
-accessSpreadsheet();
-testAPIConnection();
